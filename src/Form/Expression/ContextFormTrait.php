@@ -63,6 +63,11 @@ trait ContextFormTrait {
       '#description' => $description,
       '#required' => $context_definition->isRequired(),
       '#default_value' => $default_value,
+      '#autocomplete_route_name' => 'rules.autocomplete',
+      '#autocomplete_route_parameters' => [
+        'mode' => $mode,
+        'context' => $context_name,
+      ],
     ];
 
     $value = $mode == 'selector' ? $this->t('Switch to the direct input mode') : $this->t('Switch to data selection');

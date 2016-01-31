@@ -10,6 +10,12 @@ rules.settings:
   requirements:
     _permission: 'administer rules'
 
+rules.autocomplete:
+  path: '/admin/config/workflow/rules/ajax/autocomplete/{mode}/{context}'
+  defaults:
+    _controller: '\Drupal\rules\Controller\RulesController::autocomplete'
+  requirements:
+    _permission: 'administer rules'
 
 ### Rules Reactions
 entity.rules_reaction_rule.collection:
