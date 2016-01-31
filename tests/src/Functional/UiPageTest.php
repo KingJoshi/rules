@@ -80,6 +80,9 @@ class UiPageTest extends RulesBrowserTestBase {
    * Tests that cancelling an expression from a rule works.
    */
   public function testCancelExpressionInRule() {
+    $this->drupalGet('admin/config/workflow/rules');
+    $rules_url = $this->getSession()->getCurrentUrl();
+
     // Setup a rule with one condition.
     $this->testCreateReactionRule();
 
@@ -97,8 +100,7 @@ class UiPageTest extends RulesBrowserTestBase {
     $this->pressButton('Cancel');
     $this->assertSession()->pageTextContains('Canceled.');
 
-    $current_url = $this->getSession()->getCurrentUrl();
-    $this->assertEquals($current_url, 'admin/config/workflow/rules');
+    $this->assertEquals($rules_url, $this->getSession()->getCurrentUrl());
   }
 
   /**
