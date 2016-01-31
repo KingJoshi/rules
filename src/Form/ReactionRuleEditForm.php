@@ -87,14 +87,10 @@ class ReactionRuleEditForm extends RulesComponentFormBase {
 
   /**
    * Form submission handler for the 'cancel' action.
-   *
-   * @param array $form
-   *   An associative array containing the structure of the form.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   The current state of the form.
    */
   public function cancel(array $form, FormStateInterface $form_state) {
     $this->deleteFromTempStore();
+    drupal_set_message($this->t('Canceled.'));
     $form_state->setRedirect('entity.rules_reaction_rule.collection');
   }
 

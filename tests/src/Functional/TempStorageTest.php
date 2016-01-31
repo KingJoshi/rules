@@ -53,6 +53,11 @@ class TempStorageTest extends RulesBrowserTestBase {
 
     $this->assertSession()->pageTextContains('You have unsaved changes.');
 
+    // Edit and cancel.
+    $this->drupalGet('admin/config/workflow/rules/reactions/edit/test_rule');
+    $this->pressButton('Cancel');
+    $this->assertSession()->pageTextContains('Canceled.');
+
     // Now check with the second user that the rule is being edited and locked.
     $account_2 = $this->drupalCreateUser(['administer rules']);
     $this->drupalLogin($account_2);
