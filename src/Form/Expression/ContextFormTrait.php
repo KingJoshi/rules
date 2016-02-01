@@ -63,12 +63,25 @@ trait ContextFormTrait {
       '#description' => $description,
       '#required' => $context_definition->isRequired(),
       '#default_value' => $default_value,
-      '#autocomplete_route_name' => 'rules.autocomplete',
-      '#autocomplete_route_parameters' => [
-        'mode' => $mode,
-        'context' => $context_name,
-      ],
     ];
+    if ($mode == 'selector') {
+      $form_build_id = $form_state->getValue('form_build_id');
+      if (!$form_build_id) {
+        $f = $form_state->getCompleteForm();
+        $form_build_id = $f['form_build_id']['#id'];
+      }
+      if (!$form_build_id) {
+        $form_build_id = 'form_build_id_error';
+      }
+      $form['context'][$context_name]['setting'] += [
+        '#autocomplete_route_name' => 'rules.autocomplete',
+        '#autocomplete_route_parameters' => [
+          'mode' => $mode,
+          'context' => $context_name,
+          'form_build_id' => $form_build_id,
+        ],
+      ];
+    }
 
     $value = $mode == 'selector' ? $this->t('Switch to the direct input mode') : $this->t('Switch to data selection');
     $form['context'][$context_name]['switch_button'] = [
